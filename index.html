@@ -4,15 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Minha Primeira Página</title>
+
+    <title>Meu Site Interativo</title>
 
     <style>
+        * {
+            box-sizing: border-box;
+        }
+
         body {
             background: linear-gradient(135deg, #6a11cb, #2575fc);
             font-family: Arial, sans-serif;
             text-align: center;
-            padding: 50px;
+            padding: 30px 15px;
             color: white;
+            margin: 0;
+            min-height: 100vh;
+            transition: 0.4s;
+        }
+
+        body.dark {
+            background: linear-gradient(135deg, #141e30, #243b55);
         }
 
         h1 {
@@ -22,12 +34,22 @@
         }
 
         p {
-            font-size: 20px;
-            color: #ffffff;
+            font-size: 18px;
+        }
+
+        .container {
+            max-width: 700px;
+            margin: auto;
+            padding: 25px;
+            background: rgba(255,255,255,0.12);
+            border-radius: 25px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+            backdrop-filter: blur(10px);
         }
 
         img {
-            width: 300px;
+            width: 280px;
+            max-width: 100%;
             border-radius: 20px;
             border: 5px solid #ffeb3b;
             box-shadow: 0 5px 15px #222;
@@ -38,34 +60,342 @@
             background-color: #ff4081;
             color: white;
             border: none;
-            padding: 15px 30px;
-            font-size: 18px;
+            padding: 13px 22px;
+            font-size: 16px;
             border-radius: 30px;
             cursor: pointer;
+            margin: 8px;
             transition: 0.3s;
         }
 
         button:hover {
             background-color: #ff80ab;
-            transform: scale(1.1);
+            transform: scale(1.07);
+        }
+
+        input {
+            padding: 13px;
+            border: none;
+            border-radius: 20px;
+            font-size: 16px;
+            width: 80%;
+            max-width: 300px;
+            margin: 10px;
+            outline: none;
+        }
+
+        .card {
+            background: rgba(255,255,255,0.15);
+            padding: 20px;
+            border-radius: 18px;
+            margin: 20px 0;
+        }
+
+        #relogio {
+            font-size: 25px;
+            font-weight: bold;
+            color: #ffeb3b;
+        }
+
+        #contador {
+            font-size: 40px;
+            font-weight: bold;
+        }
+
+        footer {
+            margin-top: 30px;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 500px) {
+            h1 {
+                font-size: 30px;
+            }
+
+            .container {
+                padding: 15px;
+            }
+
+            button {
+                font-size: 14px;
+            }
         }
     </style>
 </head>
 
 <body>
 
-    <h1>Bem-vindo ao meu site!</h1>
+<div class="container">
 
-    <p>Esta é minha primeira página HTML.</p>
+    <h1>Bem-vindo ao meu site! 🚀</h1>
 
-    <img src="https://via.placeholder.com/300"
-         alt="Imagem de exemplo">
+    <p>Minha primeira página HTML interativa!</p>
 
-    <br><br>
+    <img
+        src="https://picsum.photos/400/300"
+        alt="Imagem de exemplo"
+    >
 
-    <button onclick="alert('Olá, mundo!')">
-        Clique aqui
-    </button>
+    <hr>
+
+    <!-- PERSONALIZAÇÃO -->
+
+    <div class="card">
+        <h2>👤 Personalize sua visita</h2>
+
+        <input
+            type="text"
+            id="nome"
+            placeholder="Digite seu nome"
+        >
+
+        <br>
+
+        <button onclick="saudacao()">
+            Enviar nome
+        </button>
+
+        <p id="mensagem">
+            Olá! Seja bem-vindo!
+        </p>
+    </div>
+
+    <!-- RELÓGIO -->
+
+    <div class="card">
+        <h2>⏰ Relógio digital</h2>
+
+        <div id="relogio">00:00:00</div>
+
+        <p id="data"></p>
+    </div>
+
+    <!-- CONTADOR -->
+
+    <div class="card">
+        <h2>🔢 Contador interativo</h2>
+
+        <div id="contador">0</div>
+
+        <button onclick="aumentar()">
+            ➕ Aumentar
+        </button>
+
+        <button onclick="diminuir()">
+            ➖ Diminuir
+        </button>
+
+        <button onclick="zerar()">
+            🔄 Zerar
+        </button>
+    </div>
+
+    <!-- CURTIDAS -->
+
+    <div class="card">
+        <h2>❤️ Gostou do site?</h2>
+
+        <p id="curtidas">0 curtidas</p>
+
+        <button onclick="curtir()">
+            ❤️ Curtir
+        </button>
+    </div>
+
+    <!-- CORES -->
+
+    <div class="card">
+        <h2>🎨 Personalize as cores</h2>
+
+        <button onclick="mudarCor('roxo')">
+            🟣 Roxo
+        </button>
+
+        <button onclick="mudarCor('azul')">
+            🔵 Azul
+        </button>
+
+        <button onclick="mudarCor('verde')">
+            🟢 Verde
+        </button>
+
+        <button onclick="mudarCor('vermelho')">
+            🔴 Vermelho
+        </button>
+    </div>
+
+    <!-- MODO ESCURO -->
+
+    <div class="card">
+        <h2>🌙 Aparência</h2>
+
+        <button onclick="alternarTema()">
+            Alternar modo claro/escuro
+        </button>
+    </div>
+
+    <!-- MENSAGEM -->
+
+    <div class="card">
+        <h2>💬 Mensagem surpresa</h2>
+
+        <p id="surpresa">
+            Clique no botão para descobrir!
+        </p>
+
+        <button onclick="mensagemSurpresa()">
+            Descobrir mensagem ✨
+        </button>
+    </div>
+
+    <footer>
+        <p>Desenvolvido com ❤️ usando HTML, CSS e JavaScript.</p>
+        <p>© 2026 - Meu Site Interativo</p>
+    </footer>
+
+</div>
+
+<script>
+
+    // SAUDAÇÃO PERSONALIZADA
+
+    function saudacao() {
+        let nome = document.getElementById("nome").value.trim();
+
+        if (nome === "") {
+            alert("Por favor, digite seu nome!");
+            return;
+        }
+
+        document.getElementById("mensagem").innerText =
+            "Olá, " + nome + "! Seja muito bem-vindo ao meu site! 😃";
+    }
+
+
+    // RELÓGIO EM TEMPO REAL
+
+    function atualizarRelogio() {
+        let agora = new Date();
+
+        document.getElementById("relogio").innerText =
+            agora.toLocaleTimeString("pt-BR");
+
+        document.getElementById("data").innerText =
+            agora.toLocaleDateString("pt-BR", {
+                weekday: "long",
+                year: "numeric",
+                month: "long",
+                day: "numeric"
+            });
+    }
+
+    setInterval(atualizarRelogio, 1000);
+    atualizarRelogio();
+
+
+    // CONTADOR
+
+    let numero = 0;
+
+    function atualizarContador() {
+        document.getElementById("contador").innerText = numero;
+    }
+
+    function aumentar() {
+        numero++;
+        atualizarContador();
+    }
+
+    function diminuir() {
+        numero--;
+        atualizarContador();
+    }
+
+    function zerar() {
+        numero = 0;
+        atualizarContador();
+    }
+
+
+    // CURTIDAS
+
+    let totalCurtidas = 0;
+
+    function curtir() {
+        totalCurtidas++;
+
+        document.getElementById("curtidas").innerText =
+            totalCurtidas + (totalCurtidas === 1
+                ? " curtida ❤️"
+                : " curtidas ❤️");
+    }
+
+
+    // MUDAR CORES
+
+    function mudarCor(cor) {
+        const cores = {
+            roxo: "linear-gradient(135deg, #6a11cb, #2575fc)",
+            azul: "linear-gradient(135deg, #2193b0, #6dd5ed)",
+            verde: "linear-gradient(135deg, #11998e, #38ef7d)",
+            vermelho: "linear-gradient(135deg, #cb2d3e, #ef473a)"
+        };
+
+        document.body.style.background = cores[cor];
+        document.body.classList.remove("dark");
+
+        localStorage.setItem("fundo", cor);
+        localStorage.setItem("tema", "claro");
+    }
+
+
+    // MODO ESCURO E CLARO
+
+    function alternarTema() {
+        document.body.classList.toggle("dark");
+
+        const escuro = document.body.classList.contains("dark");
+
+        localStorage.setItem(
+            "tema",
+            escuro ? "escuro" : "claro"
+        );
+    }
+
+
+    // MENSAGENS SURPRESA
+
+    const mensagens = [
+        "Você é incrível! 🌟",
+        "Nunca desista dos seus sonhos! 🚀",
+        "Continue aprendendo e evoluindo! 💡",
+        "O sucesso começa com pequenos passos! 🏆",
+        "Hoje é um ótimo dia para aprender algo novo! 😃"
+    ];
+
+    function mensagemSurpresa() {
+        let indice = Math.floor(Math.random() * mensagens.length);
+
+        document.getElementById("surpresa").innerText =
+            mensagens[indice];
+    }
+
+
+    // RESTAURAR PREFERÊNCIAS SALVAS
+
+    window.addEventListener("DOMContentLoaded", function() {
+        const tema = localStorage.getItem("tema");
+        const fundo = localStorage.getItem("fundo");
+
+        if (tema === "escuro") {
+            document.body.classList.add("dark");
+        } else if (fundo) {
+            mudarCor(fundo);
+        }
+    });
+
+</script>
 
 </body>
 </html>
